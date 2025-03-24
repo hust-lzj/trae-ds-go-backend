@@ -1,30 +1,30 @@
 # Trae-DS-Go-Backend
 
-一个基于Go语言开发的AI聊天后端系统，支持与本地大语言模型通信，提供流式响应和聊天历史记录管理功能。
+一个基于 Go 语言开发的 AI 聊天后端系统，支持与本地大语言模型通信，提供流式响应和聊天历史记录管理功能。
 
 ## 项目简介
 
-本项目是一个轻量级的AI聊天后端服务，基于Gin框架开发，支持用户注册登录、与本地部署的大语言模型（如Deepseek）进行对话，并提供完整的聊天历史记录管理功能。系统支持流式响应，提供更好的用户体验。
+本项目是一个轻量级的 AI 聊天后端服务，基于 Gin 框架开发，支持用户注册登录、与本地部署的大语言模型（如 Deepseek）进行对话，并提供完整的聊天历史记录管理功能。系统支持流式响应，提供更好的用户体验。
 
 ## 功能特点
 
-- **用户认证系统**：支持用户注册、登录，使用JWT进行身份验证
-- **大语言模型集成**：默认集成本地部署的Deepseek模型
-- **流式响应**：支持流式输出AI回复，提供更好的用户体验
-- **聊天历史管理**：自动保存聊天记录，支持查询、删除操作
-- **可配置性**：通过环境变量灵活配置服务参数
-- **安全性**：密码加密存储，输入数据验证和清理
+-   **用户认证系统**：支持用户注册、登录，使用 JWT 进行身份验证
+-   **大语言模型集成**：默认集成本地部署的 Deepseek 模型
+-   **流式响应**：支持流式输出 AI 回复，提供更好的用户体验
+-   **聊天历史管理**：自动保存聊天记录，支持查询、删除操作
+-   **可配置性**：通过环境变量灵活配置服务参数
+-   **安全性**：密码加密存储，输入数据验证和清理
 
 ## 技术架构
 
 ### 核心技术栈
 
-- **Go语言**：主要开发语言
-- **Gin**：Web框架
-- **GORM**：ORM库，用于数据库操作
-- **SQLite**：轻量级数据库
-- **JWT**：用户认证
-- **HTTP/SSE**：流式数据传输
+-   **Go 语言**：主要开发语言
+-   **Gin**：Web 框架
+-   **GORM**：ORM 库，用于数据库操作
+-   **SQLite**：轻量级数据库
+-   **JWT**：用户认证
+-   **HTTP/SSE**：流式数据传输
 
 ### 项目结构
 
@@ -54,8 +54,8 @@
 
 ### 前置条件
 
-- Go 1.21或更高版本
-- 本地部署的Deepseek模型或其他兼容的LLM服务
+-   Go 1.21 或更高版本
+-   本地部署的 Deepseek 模型或其他兼容的 LLM 服务
 
 ### 安装步骤
 
@@ -97,9 +97,9 @@ LLM_API_URL=http://localhost:11434/api/chat/
 go run main.go
 ```
 
-服务将在`http://localhost:8080`启动（或根据您在.env中配置的端口）。
+服务将在`http://localhost:8080`启动（或根据您在.env 中配置的端口）。
 
-## API接口文档
+## API 接口文档
 
 ### 认证接口
 
@@ -113,9 +113,9 @@ POST /api/register
 
 ```json
 {
-  "username": "用户名",
-  "password": "密码",
-  "email": "邮箱地址"
+    "username": "用户名",
+    "password": "密码",
+    "email": "邮箱地址"
 }
 ```
 
@@ -123,12 +123,12 @@ POST /api/register
 
 ```json
 {
-  "token": "JWT令牌",
-  "user": {
-    "id": 1,
-    "username": "用户名",
-    "email": "邮箱地址"
-  }
+    "token": "JWT令牌",
+    "user": {
+        "id": 1,
+        "username": "用户名",
+        "email": "邮箱地址"
+    }
 }
 ```
 
@@ -142,8 +142,8 @@ POST /api/login
 
 ```json
 {
-  "username": "用户名",
-  "password": "密码"
+    "username": "用户名",
+    "password": "密码"
 }
 ```
 
@@ -151,12 +151,12 @@ POST /api/login
 
 ```json
 {
-  "token": "JWT令牌",
-  "user": {
-    "id": 1,
-    "username": "用户名",
-    "email": "邮箱地址"
-  }
+    "token": "JWT令牌",
+    "user": {
+        "id": 1,
+        "username": "用户名",
+        "email": "邮箱地址"
+    }
 }
 ```
 
@@ -172,7 +172,7 @@ GET /api/models
 
 ```json
 {
-  "models": ["deepseek-r1:7b"]
+    "models": ["deepseek-r1:7b"]
 }
 ```
 
@@ -194,20 +194,18 @@ Authorization: Bearer <JWT令牌>
 
 ```json
 {
-  "messages": [
-    {"role": "user", "content": "你好，请介绍一下自己"}
-  ],
-  "model": "deepseek-r1:7b",
-  "options": {
-    "temperature": 0.7
-  },
-  "history_id": "可选的历史记录ID"
+    "messages": [{ "role": "user", "content": "你好，请介绍一下自己" }],
+    "model": "deepseek-r1:7b",
+    "options": {
+        "temperature": 0.7
+    },
+    "history_id": "可选的历史记录ID"
 }
 ```
 
 响应：
 
-服务器发送的是Server-Sent Events (SSE)格式的流式数据，每个事件包含模型生成的部分响应。
+服务器发送的是 Server-Sent Events (SSE)格式的流式数据，每个事件包含模型生成的部分响应。
 
 ### 聊天历史记录接口
 
@@ -227,11 +225,11 @@ Authorization: Bearer <JWT令牌>
 
 ```json
 {
-  "model": "deepseek-r1:7b",
-  "messages": [
-    {"role": "user", "content": "你好"},
-    {"role": "assistant", "content": "你好！有什么我可以帮助你的吗？"}
-  ]
+    "model": "deepseek-r1:7b",
+    "messages": [
+        { "role": "user", "content": "你好" },
+        { "role": "assistant", "content": "你好！有什么我可以帮助你的吗？" }
+    ]
 }
 ```
 
@@ -275,15 +273,15 @@ Authorization: Bearer <JWT令牌>
 
 ### 环境变量
 
-| 变量名 | 说明 | 默认值 |
-|-------|------|--------|
-| PORT | 服务器端口 | 8080 |
-| GIN_MODE | Gin运行模式 | debug |
-| JWT_SECRET | JWT密钥 | - |
-| DB_PATH | SQLite数据库路径 | data.db |
-| LLM_API_URL | LLM模型API地址 | http://localhost:11434/api/chat |
+| 变量名      | 说明              | 默认值                          |
+| ----------- | ----------------- | ------------------------------- |
+| PORT        | 服务器端口        | 8080                            |
+| GIN_MODE    | Gin 运行模式      | debug                           |
+| JWT_SECRET  | JWT 密钥          | -                               |
+| DB_PATH     | SQLite 数据库路径 | data.db                         |
+| LLM_API_URL | LLM 模型 API 地址 | http://localhost:11434/api/chat |
 
-### LLM模型配置
+### LLM 模型配置
 
 默认配置：
 
@@ -298,9 +296,9 @@ var DefaultLLMConfig = LLMConfig{
 
 ## 开发与扩展
 
-### 添加新的模型支持
+### 配合前端页面推荐
 
-修改`config/llm.go`中的`Chat`方法，更改模型名称或添加模型选择逻辑。
+可配合 github 项目 trae-ds-page-assist 使用
 
 ### 自定义响应处理
 
