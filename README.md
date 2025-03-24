@@ -298,7 +298,7 @@ var DefaultLLMConfig = LLMConfig{
 
 ### 配合前端页面推荐
 
-可配合 github 项目 trae-ds-page-assist 使用
+可配合 github 项目 [trae-ds-page-assist](https://github.com/hust-lzj/trae-ds-page-assist) 使用
 
 ### 自定义响应处理
 
